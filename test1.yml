@@ -1,0 +1,13 @@
+---
+- hosts: web
+  user: ec2-user
+  sudo: yes
+  vars:
+    a: 10
+    b: 20
+    name: amit.txt
+  tasks:
+  - debug:
+      msg: "A chi value aahe {{ a }}"
+  - debug:
+      msg: "b chi value aahe {{ b }}"
