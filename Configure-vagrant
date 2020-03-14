@@ -16,3 +16,6 @@ C:> vagrant ssh
 
 Step7: Check Virtual machihne on Vitualbox
 
+Default username: root
+Default password: vagrant
+
