@@ -1,0 +1,16 @@
+---
+- hosts: web
+  user: ec2-user
+  sudo: true
+  vars:
+    package: ftp
+  tasks:
+  - name: Installing rpm packges
+    yum:
+      name: "{{ item }}"
+      state: present
+      enablerepo: epel
+    with_items:
+      - git
+      - vsftpd
+      - "{{ package }}"
