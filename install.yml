@@ -1,0 +1,10 @@
+---
+- hosts: web
+  user: ec2-user
+  sudo: true
+  tasks:
+  - name: Installing rpm packges
+    yum:
+      name: git
+      state: present
+      enablerepo: epel
