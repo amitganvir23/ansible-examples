@@ -1,0 +1,18 @@
+Step1: Download vagrant
+Stpe2: Install vagrant
+Step3: Install VirtualBox
+Step4: Create a Vagrant file of Your OS which needs to be download
+create a file name "Vagrantfile" without .txt format
+=================
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+end
+=================
+Step5: Run below command on Dos prompt and current location should be the path of "Vagrantfile".
+C:> vagrant up
+
+Step6: To connect with Virtual Machine
+C:> vagrant ssh
+
+Step7: Check Virtual machihne on Vitualbox
+
