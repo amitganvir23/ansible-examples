@@ -1,0 +1,8 @@
+- name: Template a file python ap1
+  template:
+    src: hi.py.j2
+    dest: /tmp/hello.py
+    mode: '0777'
+
+- name: executing and deploying app
+  shell: "/tmp/hello.py"
