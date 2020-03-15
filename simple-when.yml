@@ -1,0 +1,24 @@
+---
+- hosts: web
+  sudo: true
+  user: ec2-user
+  tasks:
+  - debug:
+      msg: "{{ ansible_os_family }}"
+
+  - name: installing software on Redhat/Centos/AmazonLiux
+    yum:
+      name: git
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: installing software on Ubuntu
+    apt:
+      name: git
+      state: present
+    when: ansible_os_family == "Ubuntu" or ansible_os_family == "Debain"
+
+  - name: creating a file
+    file:
+      path: /tmp/xyz
+      state: touch
