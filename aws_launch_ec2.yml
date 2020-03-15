@@ -1,0 +1,38 @@
+---
+- name: Engine Start
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  vars:
+        instance_type: t2.micro
+        security_group: ansible-sg
+        image: ami-0e2ff28bfb72a4e45
+        region: us-east-1
+        keypair: amit
+        count: 1
+        vpc_id: vpc-07cab67d
+        vpc_subnet_id: subnet-0e052b20
+        volumes:
+               - device_name: /dev/xvda
+                 volume_size: 8
+                 volume_type: gp2
+                 delete_on_termination: true
+  tasks:
+  - name: To create EC2 Instance on AWS
+    ec2:
+     region: '{{ region }}'
+     key_name: '{{ keypair }}'
+     group: '{{ security_group }}'
+     instance_type: '{{ instance_type }}'
+     image: '{{ image }}'
+     wait: yes
+     wait_timeout: 500
+     volumes: '{{ volumes }}'
+     vpc_subnet_id: '{{ vpc_subnet_id }}'
+     assign_public_ip: yes
+     count_tag:
+       Name: vm4
+     exact_count: 1
+     instance_tags:
+        db: node
+        Name: vm4
