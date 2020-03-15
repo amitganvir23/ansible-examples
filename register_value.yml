@@ -1,0 +1,12 @@
+---
+- hosts: web
+  tasks:
+  - name: checking my machine name
+    shell: "hostname"
+    register: myhost
+
+
+  - name: "creating a file name {{ myhost.stdout }}"
+    file:
+      path: /tmp/{{ myhost.stdout }}
+      state: touch
