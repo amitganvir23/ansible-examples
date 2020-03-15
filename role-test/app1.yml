@@ -1,0 +1,13 @@
+---
+- hosts: web
+  sudo: true
+  user: ec2-user
+  vars:
+    name: Amit
+    first:
+       name: Amit
+       job: Persistent
+  roles:
+   - app1
+   - app2
+   - app3
