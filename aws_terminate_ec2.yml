@@ -1,0 +1,22 @@
+---
+- name: Engine Start
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  vars:
+        region: us-east-1
+        tagname: vm3
+  tasks:
+  - name: Checking instance name
+    shell: "aws ec2 describe-instances --region {{ region }} --query 'Reservations[].Instances[].[PrivateIpAddress,InstanceId,Tags[?Key==`Name`].Value[]]' --output text |grep -B 1 -w {{ tagname }} |grep i- |awk '{ print $2 }'"
+    register: myinstanceid
+
+  - debug:
+      msg: "{{ myinstanceid.stdout }}"
+
+  - name: Terminate EC2 Singapore(zone) instance
+    ec2:
+        instance_ids: "{{ myinstanceid.stdout }}"
+        region: "{{ region }}"
+        state: absent
+        #wait: True
